@@ -11,8 +11,8 @@ namespace asshcii.game {
         }
 
         public void Attack(Ship ship) {
-            var enemyHealth = ship.GetComponent(typeof(Health)) as Health;
-            var shipDamage = (this.GetComponent(typeof(Attack)) as Attack).Damage;
+            var enemyHealth = ship.GetComponent<Health>();
+            var shipDamage = this.GetComponent<Attack>().Damage;
             enemyHealth.DamageBy(shipDamage);
         }
     }

@@ -9,13 +9,21 @@ namespace asshcii.ecs
         public string Name { get; }
         private List<Component> components;
 
-        public Entity(string name) {
+        protected Entity(string name) {
             Name = name;
             components = new List<Component>();
         }
 
         public Component GetComponent(Type type) {
             return components.Single(cmpt => cmpt.GetType().Equals(type));
+        }
+
+        public T GetComponent<T>() where T : Component {
+            return components.OfType<T>().Single();
+        }
+
+        public IEnumerable<T> GetComponents<T>() where T : Component {
+            return components.OfType<T>();
         }
 
         public void AddComponent(Component component) {
