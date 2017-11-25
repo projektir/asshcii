@@ -1,4 +1,4 @@
-namespace ashhcii
+namespace asshcii.ecs
 {
     public abstract class Component { }
 }

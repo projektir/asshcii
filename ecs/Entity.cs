@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ashhcii
+namespace asshcii.ecs
 {
     public abstract class Entity {
         public string Name { get; }
         private List<Component> components;
 
-        internal Entity(string name) {
+        public Entity(string name) {
             Name = name;
             components = new List<Component>();
         }

@@ -1,4 +1,6 @@
-namespace ashhcii {
+using asshcii.ecs;
+
+namespace asshcii.game.components {
     public class Health : Component {
         private int _hitPoints { get; set; }
         private int _maxHitPoints { get; set; }

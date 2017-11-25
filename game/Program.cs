@@ -1,6 +1,7 @@
 ﻿using System;
+using asshcii.game.components;
 
-namespace ashhcii
+namespace asshcii.game
 {
     class Program
     {

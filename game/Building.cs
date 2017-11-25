@@ -1,6 +1,8 @@
 using System.Text;
+using asshcii.ecs;
+using asshcii.game.components;
 
-namespace ashhcii {
+namespace asshcii.game {
     public class Building : Entity {
         public byte UpgradeLevel { get; private set; } = 1;
         public int Cost { get; }

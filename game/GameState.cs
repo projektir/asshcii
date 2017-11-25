@@ -1,4 +1,4 @@
-namespace ashhcii {
+namespace asshcii.game {
     public class GameState {
         
     }

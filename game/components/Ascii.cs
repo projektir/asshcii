@@ -1,6 +1,7 @@
 using System.Text;
+using asshcii.ecs;
 
-namespace ashhcii {
+namespace asshcii.game.components {
     public class Ascii : Component {
         public char[,] Characters { get; }
 

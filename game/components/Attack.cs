@@ -1,4 +1,6 @@
-namespace ashhcii {
+using asshcii.ecs;
+
+namespace asshcii {
     public class Attack : Component {
         public int Damage { get; }
 
