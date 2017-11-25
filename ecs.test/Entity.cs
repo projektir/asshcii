@@ -7,9 +7,7 @@ namespace asshcii.ecs.test {
         public EntityImpl(string name) : base(name) { }
     }
 
-    class TestComponent : asshcii.ecs.Component {
-
-    }
+    class TestComponent : asshcii.ecs.Component { }
 
     [TestClass]
     public class Entity {
@@ -28,14 +26,12 @@ namespace asshcii.ecs.test {
             var entity = new EntityImpl("Test");
 
             try {
-                // This should throw an exception, because we don't have this component
                 entity.GetComponent<TestComponent>();
                 Assert.Fail("Entity should throw if the component doesn't exist");
-            } catch(System.InvalidOperationException){
+            } catch(System.InvalidOperationException) {
                 // Succeeds
-            } catch(Exception ex) {
-                Assert.Fail("Entity.GetComponent should throw an SystemInvalidException, got {0}", ex);
             }
+            
             entity.AddComponent(new TestComponent());
 
             Assert.IsNotNull(entity.GetComponent<TestComponent>());
