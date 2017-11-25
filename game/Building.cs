@@ -20,8 +20,8 @@ namespace asshcii.game {
 
             stringBuilder.Append(base.ToString());
             stringBuilder.Append(", ");
-            stringBuilder.Append($"{nameof(UpgradeLevel)}: {UpgradeLevel}");
-            stringBuilder.Append($"{nameof(Cost)}: {Cost}");
+            stringBuilder.Append($"{nameof(UpgradeLevel)}: {UpgradeLevel} ");
+            stringBuilder.Append($"{nameof(Cost)}: {Cost} ");
 
             return stringBuilder.ToString();
         }

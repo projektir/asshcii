@@ -23,14 +23,18 @@ namespace asshcii.game
             var vulture = new Ship("Vulture", vultureAttack, vultureHealth);
 
             Console.WriteLine(refinery);
+            Console.WriteLine();
 
-            Console.WriteLine("Before Attack:\n");
-            Console.WriteLine($"{kestrel.ToString()}\n{vulture.ToString()}");
+            Console.WriteLine("Before Attack:");
+            Console.WriteLine(kestrel);
+            Console.WriteLine(vulture);
+            Console.WriteLine();
 
             kestrel.Attack(vulture);
 
-            Console.WriteLine("After Attack:\n");
-            Console.WriteLine($"{kestrel.ToString()}\n{vulture.ToString()}");
+            Console.WriteLine("After Attack:");
+            Console.WriteLine(kestrel);
+            Console.WriteLine(vulture);
         }
     }
 }
