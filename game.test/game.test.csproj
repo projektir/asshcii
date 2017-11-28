@@ -4,6 +4,10 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <RootNamespace>asshcii.game.test</RootNamespace>
+
+    <AssemblyName>asshcii.game.test</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
