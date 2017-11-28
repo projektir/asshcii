@@ -1,3 +1,3 @@
 namespace asshcii.ecs {
-    public abstract class Component { }
+    public interface IComponent { }
 }

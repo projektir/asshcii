@@ -6,26 +6,26 @@ using System.Text;
 namespace asshcii.ecs {
     public abstract class Entity {
         public string Name { get; }
-        private List<Component> components;
+        private List<IComponent> components;
 
         protected Entity(string name) {
             Name = name;
-            components = new List<Component>();
+            components = new List<IComponent>();
         }
 
-        public Component GetComponent(Type type) {
+        public IComponent GetComponent(Type type) {
             return components.Single(cmpt => cmpt.GetType().Equals(type));
         }
 
-        public T GetComponent<T>() where T : Component {
+        public T GetComponent<T>() where T : IComponent {
             return components.OfType<T>().Single();
         }
 
-        public IEnumerable<T> GetComponents<T>() where T : Component {
+        public IEnumerable<T> GetComponents<T>() where T : IComponent {
             return components.OfType<T>();
         }
 
-        public void AddComponent(Component component) {
+        public void AddComponent(IComponent component) {
             var type = component.GetType();
             if (components.Exists(cmpt => cmpt.GetType().Equals(type))) {
                 throw new ArgumentException($"The component {nameof(type)} is already present.");
@@ -42,7 +42,7 @@ namespace asshcii.ecs {
                 stringBuilder.Append(", ");
             }
 
-            foreach (Component component in components) {
+            foreach (IComponent component in components) {
                 var type = component.GetType().Name;
                 stringBuilder.Append($"{type}: {{ {component.ToString()} }}");
 

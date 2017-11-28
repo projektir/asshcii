@@ -7,7 +7,7 @@ namespace asshcii.ecs.test {
         public EntityImpl(string name) : base(name) { }
     }
 
-    class TestComponent : asshcii.ecs.Component { }
+    class TestComponent : asshcii.ecs.IComponent{ }
 
     [TestClass]
     public class Entity {

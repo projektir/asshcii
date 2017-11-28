@@ -1,7 +1,7 @@
 using asshcii.ecs;
 
 namespace asshcii.game.components {
-    public class Health : Component {
+    public class Health : IComponent {
         private int _hitPoints { get; set; }
         private int _maxHitPoints { get; set; }
 

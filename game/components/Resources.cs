@@ -3,11 +3,14 @@ using System.Text;
 using System.Linq;
 
 using asshcii.ecs;
+using System;
 
 namespace asshcii {
+    [Obsolete]
     public enum Resource { Power, Iron }
 
-    public class AvailableResources : Component {
+    [Obsolete]
+    public class AvailableResources : IComponent {
         public Dictionary<Resource, bool> Resources { get; private set; }
 
         public AvailableResources(bool power, bool iron) {
@@ -32,7 +35,8 @@ namespace asshcii {
         }
     }
 
-    public class Resources : Component {
+    [Obsolete]
+    public class Resources : IComponent {
         public Dictionary<Resource, int> InnerResources { get; set; }
 
         public Resources(int power, int iron) {

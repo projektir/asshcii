@@ -1,5 +1,6 @@
 ﻿using System;
 using asshcii.game.components;
+using asshcii.game.resources;
 
 namespace asshcii.game {
     class Program {
@@ -10,8 +11,11 @@ namespace asshcii.game {
             var refineryAscii = new Ascii(new char[,] { { 'X', ' ', '=' },
                                                         { 'X', ' ', 'X' }});
 
-            var resources = new Resources(50, 100);
-            var refinery = new Building("Refinery", refineryAscii, resources);
+            //var resources = new Resources(50, 100);
+            var refinery = new Building("Refinery", refineryAscii);
+            refinery.AddComponent(new Produces<IronResource>(100));
+            refinery.AddComponent(new Consumes<PowerResource>(100));
+            refinery.AddComponent(new Produces<PowerResource>(100));
 
             var playerResources = new Resources(400, 200);
             var playerBase = new PlayerBase("TestBase", playerResources, neptune);

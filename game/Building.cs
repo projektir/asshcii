@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,30 +8,32 @@ using asshcii.game.components;
 
 namespace asshcii.game {
     public class Building : Entity {
+        [Obsolete]
         public byte UpgradeLevel { get; private set; } = 0;
 
-        public Building(string name, Ascii ascii, Resources resourceCosts) : base(name) {
+        public Building(string name, Ascii ascii) : base(name) {
             this.AddComponent(ascii);
-            this.AddComponent(resourceCosts);
         }
 
         public void Upgrade() {
-            var resourceCosts = this.GetComponent<Resources>().InnerResources;
+            var costs = this.GetComponents<IUpgradeCost>();
+            var level = this.GetComponent<UpgradeLevel>();
 
-            foreach (var resource in resourceCosts.ToList()) {
+            foreach (var resource in costs.ToList()) {
                 // Write some exponential increase logic instead
-                resourceCosts[resource.Key] = resource.Value + ((resource.Value / 2) * UpgradeLevel);
+                resource.Increase();
             }
 
-            UpgradeLevel++;
+            level.Upgrade();
         }
 
         public override string ToString() {
+            var level = this.GetComponent<UpgradeLevel>();
             var stringBuilder = new StringBuilder();
 
             stringBuilder.Append(base.ToString());
             stringBuilder.Append(", ");
-            stringBuilder.Append($"{nameof(UpgradeLevel)}: {UpgradeLevel}");
+            stringBuilder.Append($"Upgrade level: {level.Level}");
 
             return stringBuilder.ToString();
         }
