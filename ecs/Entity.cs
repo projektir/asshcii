@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace asshcii.ecs
-{
+namespace asshcii.ecs {
     public abstract class Entity {
         public string Name { get; }
         private List<Component> components;
@@ -37,8 +36,12 @@ namespace asshcii.ecs
 
         public override string ToString() {
             var stringBuilder = new StringBuilder();
-            stringBuilder.Append($"Name: {Name}, ");
+            stringBuilder.Append($"Name: {Name}");
             
+            if (components.Any()) {
+                stringBuilder.Append(", ");
+            }
+
             foreach (Component component in components) {
                 var type = component.GetType().Name;
                 stringBuilder.Append($"{type}: {{ {component.ToString()} }}");

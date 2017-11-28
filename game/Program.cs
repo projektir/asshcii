@@ -1,18 +1,38 @@
 ﻿using System;
 using asshcii.game.components;
 
-namespace asshcii.game
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            var neptune = new Planet("Neptune");
+namespace asshcii.game {
+    class Program {
+        static void Main(string[] args) {
+            var neptuneResources = new AvailableResources(true, true);
+            var neptune = new Planet("Neptune", neptuneResources);
 
             var refineryAscii = new Ascii(new char[,] { { 'X', ' ', '=' },
                                                         { 'X', ' ', 'X' }});
 
-            var refinery = new Building("Refinery", refineryAscii);
+            var resources = new Resources(50, 100);
+            var refinery = new Building("Refinery", refineryAscii, resources);
+
+            var playerResources = new Resources(400, 200);
+            var playerBase = new PlayerBase("TestBase", playerResources, neptune);
+
+            Console.WriteLine(playerBase);
+            Console.WriteLine();
+
+            playerBase.TryBuild(refinery);
+
+            Console.WriteLine(playerBase);
+            Console.WriteLine();
+
+            playerBase.TryBuild(refinery);
+
+            Console.WriteLine(playerBase);
+            Console.WriteLine();
+
+            playerBase.TryBuild(refinery);
+
+            Console.WriteLine(playerBase);
+            Console.WriteLine();
 
             var kestrelAttack = new Attack(20);
             var kestrelHealth = new Health(200);
@@ -22,13 +42,9 @@ namespace asshcii.game
             var vultureHealth = new Health(250);
             var vulture = new Ship("Vulture", vultureAttack, vultureHealth);
 
-            Console.WriteLine(refinery);
-            Console.WriteLine();
-
-            Console.WriteLine("Before Attack:");
+            Console.WriteLine("Before Attack:\n");
             Console.WriteLine(kestrel);
             Console.WriteLine(vulture);
-            Console.WriteLine();
 
             kestrel.Attack(vulture);
 
