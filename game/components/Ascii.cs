@@ -2,7 +2,7 @@ using System.Text;
 using asshcii.ecs;
 
 namespace asshcii.game.components {
-    public class Ascii : Component {
+    public class Ascii : IComponent {
         public char[,] Characters { get; }
 
         public Ascii(char[,] characters) {

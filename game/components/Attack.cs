@@ -1,7 +1,7 @@
 using asshcii.ecs;
 
 namespace asshcii {
-    public class Attack : Component {
+    public class Attack : IComponent {
         public int Damage { get; }
 
         public Attack(int damage) {
