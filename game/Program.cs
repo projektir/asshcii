@@ -5,38 +5,33 @@ using asshcii.game.resources;
 namespace asshcii.game {
     class Program {
         static void Main(string[] args) {
-            var neptuneResources = new AvailableResources(true, true);
-            var neptune = new Planet("Neptune", neptuneResources);
+            var neptune = new Planet("Neptune");
 
             var refineryAscii = new Ascii(new char[,] { { 'X', ' ', '=' },
                                                         { 'X', ' ', 'X' }});
 
-            //var resources = new Resources(50, 100);
+            // TODO: Make pre-defined buildings that automatically add all the components when they're constructed
             var refinery = new Building("Refinery", refineryAscii);
             refinery.AddComponent(new Produces<IronResource>(100));
-            refinery.AddComponent(new Consumes<PowerResource>(100));
             refinery.AddComponent(new Produces<PowerResource>(100));
 
-            var playerResources = new Resources(400, 200);
-            var playerBase = new PlayerBase("TestBase", playerResources, neptune);
+            refinery.AddComponent(new UpgradeCost<IronResource>(100));
+            refinery.AddComponent(new UpgradeCost<PowerResource>(100));
+            
+            refinery.AddComponent(new Consumes<PowerResource>(100));
 
-            Console.WriteLine(playerBase);
-            Console.WriteLine();
+            var playerBase = new PlayerBase("TestBase", neptune);
+            playerBase.AddComponent(new Storage<IronResource>(1000));
+            playerBase.AddComponent(new Storage<PowerResource>(1000));
+            playerBase.Buildings.Add(refinery);
 
-            playerBase.TryBuild(refinery);
-
-            Console.WriteLine(playerBase);
-            Console.WriteLine();
-
-            playerBase.TryBuild(refinery);
-
-            Console.WriteLine(playerBase);
-            Console.WriteLine();
-
-            playerBase.TryBuild(refinery);
-
-            Console.WriteLine(playerBase);
-            Console.WriteLine();
+            while(true){
+                Console.WriteLine(playerBase);
+                Console.WriteLine();
+                if(!playerBase.TryBuild(refinery)){
+                    break;
+                }
+            }
 
             var kestrelAttack = new Attack(20);
             var kestrelHealth = new Health(200);
@@ -46,12 +41,13 @@ namespace asshcii.game {
             var vultureHealth = new Health(250);
             var vulture = new Ship("Vulture", vultureAttack, vultureHealth);
 
-            Console.WriteLine("Before Attack:\n");
+            Console.WriteLine("Before Attack:");
             Console.WriteLine(kestrel);
             Console.WriteLine(vulture);
 
             kestrel.Attack(vulture);
 
+            Console.WriteLine();
             Console.WriteLine("After Attack:");
             Console.WriteLine(kestrel);
             Console.WriteLine(vulture);

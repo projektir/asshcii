@@ -13,6 +13,7 @@ namespace asshcii.game {
 
         public Building(string name, Ascii ascii) : base(name) {
             this.AddComponent(ascii);
+            this.AddComponent(new UpgradeLevel(0));
         }
 
         public void Upgrade() {
