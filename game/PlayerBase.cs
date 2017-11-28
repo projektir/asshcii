@@ -7,52 +7,50 @@ using asshcii.game.components;
 
 namespace asshcii.game {
     public class PlayerBase : Entity {
-        public Resources Resources { get; private set; }
         public Planet Planet { get; private set; }
 
-        private List<Building> _buildings;
+        public List<Building> Buildings = new List<Building>();
 
-        public PlayerBase(string name, Resources resources, Planet planet) : base(name) {
-            Resources = resources;
+        public PlayerBase(string name, Planet planet) : base(name) {
             Planet = planet;
-
-            _buildings = new List<Building>();
         }
 
         public bool TryBuild(Building building) {
-            var costs = building.GetComponent<Resources>();
-            var resources = Resources;
+            var costs = building.GetComponents<IUpgradeCost>();
+            var resources = GetComponents<IStorage>();
 
-            if (resources.TrySubtractResources(costs, out resources)) {
-                building.Upgrade();
-
-                if (!_buildings.Contains(building)) {
-                    _buildings.Add(building);
-                }
-
-                Resources = resources;
-
-                return true;
-            } else {
-                return false;
+            foreach(var cost in costs){
+                var matchingResource = resources.FirstOrDefault(r => r.Resource.Equals(cost.Resource));
+                if(matchingResource == null || matchingResource.Amount < cost.Amount) return false;
             }
+            foreach(var cost in costs){
+                var matchingResource = resources.First(r => r.Resource.Equals(cost.Resource));
+                matchingResource.Subtract(cost.Amount);
+            }
+
+            building.Upgrade();
+            return true;
         }
 
         public override string ToString() {
             var stringBuilder = new StringBuilder();
 
             stringBuilder.Append(base.ToString());
-            stringBuilder.Append(", ");
-            stringBuilder.Append($"{nameof(Resources)}: {Resources}, ");
+            stringBuilder.Append(", Resources: ");
+            foreach(var resource in GetComponents<IStorage>()){
+                stringBuilder.Append($"{resource.Resource.Name}: {resource.Amount}, ");
+            }
             stringBuilder.Append($"{nameof(Planet)}: {Planet}, ");
 
-            stringBuilder.Append("Buildings: [");
+            stringBuilder.AppendLine("Buildings: [");
 
-            foreach (Building building in _buildings) {
-                stringBuilder.Append(building);
+            foreach (Building building in Buildings) {
+                stringBuilder.Append("    ").Append(building);
 
-                if (building != _buildings.Last()) {
-                    stringBuilder.Append(", ");
+                if (building != Buildings.Last()) {
+                    stringBuilder.AppendLine(", ");
+                } else {
+                    stringBuilder.AppendLine();
                 }
             }
 

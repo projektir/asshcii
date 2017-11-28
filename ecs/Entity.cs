@@ -43,8 +43,7 @@ namespace asshcii.ecs {
             }
 
             foreach (IComponent component in components) {
-                var type = component.GetType().Name;
-                stringBuilder.Append($"{type}: {{ {component.ToString()} }}");
+                stringBuilder.Append($"{{ {component.ToString()} }}");
 
                 if (component != components.Last()) {
                     stringBuilder.Append(", ");
