@@ -10,7 +10,7 @@ namespace asshcii.game.components {
         }
 
         public override string ToString() {
-            StringBuilder stringBuilder = new StringBuilder();
+            var stringBuilder = new StringBuilder();
 
             for (int i = 0; i < Characters.GetLength(0); i++) {
                 for (int j = 0; j < Characters.GetLength(1); j++) {

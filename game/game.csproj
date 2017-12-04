@@ -2,8 +2,6 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <RootNamespace>asshcii.game</RootNamespace>
-    <AssemblyName>asshcii.game</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\ecs\ecs.csproj" />

@@ -1,4 +1,5 @@
 using asshcii.ecs;
+using asshcii.game.resources;
 
 namespace asshcii.game.components
 {

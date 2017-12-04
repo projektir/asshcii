@@ -6,10 +6,15 @@ using System.Text;
 namespace asshcii.ecs {
     public abstract class Entity {
         public string Name { get; }
-        private readonly List<IComponent> components = new List<IComponent>();
+        private List<IComponent> components;
 
         protected Entity(string name) {
             Name = name;
+            components = new List<IComponent>();
+        }
+
+        public IComponent GetComponent(Type type) {
+            return components.Single(cmpt => cmpt.GetType().Equals(type));
         }
 
         public T GetComponent<T>() where T : IComponent {
@@ -21,8 +26,8 @@ namespace asshcii.ecs {
         }
 
         public void AddComponent(IComponent component) {
-            Type type = component.GetType();
-            if (components.Exists(cmpt => cmpt.GetType() == type)) {
+            var type = component.GetType();
+            if (components.Exists(cmpt => cmpt.GetType().Equals(type))) {
                 throw new ArgumentException($"The component {nameof(type)} is already present.");
             }
 
@@ -30,7 +35,7 @@ namespace asshcii.ecs {
         }
 
         public override string ToString() {
-            StringBuilder stringBuilder = new StringBuilder();
+            var stringBuilder = new StringBuilder();
             stringBuilder.Append($"Name: {Name}");
             
             if (components.Any()) {
@@ -38,7 +43,7 @@ namespace asshcii.ecs {
             }
 
             foreach (IComponent component in components) {
-                stringBuilder.Append($"{{ {component} }}");
+                stringBuilder.Append($"{{ {component.ToString()} }}");
 
                 if (component != components.Last()) {
                     stringBuilder.Append(", ");

@@ -1,19 +1,20 @@
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace asshcii.ecs.test {
 
-    class EntityImpl : ecs.Entity {
+    class EntityImpl : asshcii.ecs.Entity {
         public EntityImpl(string name) : base(name) { }
     }
 
-    class TestComponent : IComponent{ }
+    class TestComponent : asshcii.ecs.IComponent{ }
 
     [TestClass]
     public class Entity {
         [TestMethod]
         public void TestName(){
-            const string testName = "Test";
-            EntityImpl entity = new EntityImpl(testName);
+            var testName = "Test";
+            var entity = new EntityImpl(testName);
             Assert.AreEqual(entity.Name, testName);
 
             entity = new EntityImpl("Blah");
@@ -22,7 +23,7 @@ namespace asshcii.ecs.test {
 
         [TestMethod]
         public void TestComponents(){
-            EntityImpl entity = new EntityImpl("Test");
+            var entity = new EntityImpl("Test");
 
             try {
                 entity.GetComponent<TestComponent>();

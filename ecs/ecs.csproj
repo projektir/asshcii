@@ -1,7 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <RootNamespace>asshcii.ecs</RootNamespace>
-    <AssemblyName>asshcii.ecs</AssemblyName>
   </PropertyGroup>
 </Project>
