@@ -1,34 +1,33 @@
 ﻿using System;
+using asshcii.game.buildings;
 using asshcii.game.components;
 using asshcii.game.resources;
 
-namespace asshcii.game {
-    class Program {
-        static void Main(string[] args) {
+namespace asshcii.game
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
             var neptune = new Planet("Neptune");
 
             var refineryAscii = new Ascii(new char[,] { { 'X', ' ', '=' },
                                                         { 'X', ' ', 'X' }});
 
             // TODO: Make pre-defined buildings that automatically add all the components when they're constructed
-            var refinery = new Building("Refinery", refineryAscii);
-            refinery.AddComponent(new Produces<IronResource>(100));
-            refinery.AddComponent(new Produces<PowerResource>(100));
-
-            refinery.AddComponent(new UpgradeCost<IronResource>(100));
-            refinery.AddComponent(new UpgradeCost<PowerResource>(100));
-            
-            refinery.AddComponent(new Consumes<PowerResource>(100));
+            var ironMine = new IronMine();
 
             var playerBase = new PlayerBase("TestBase", neptune);
             playerBase.AddComponent(new Storage<IronResource>(1000));
             playerBase.AddComponent(new Storage<PowerResource>(1000));
-            playerBase.Buildings.Add(refinery);
+            playerBase.Buildings.Add(ironMine);
 
-            while(true){
+            while (true)
+            {
                 Console.WriteLine(playerBase);
                 Console.WriteLine();
-                if(!playerBase.TryBuild(refinery)){
+                if (!playerBase.TryBuild(ironMine))
+                {
                     break;
                 }
             }
