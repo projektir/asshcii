@@ -3,9 +3,10 @@ using asshcii.game.resources;
 
 namespace asshcii.game.components
 {
-        public interface IProduces : IComponent {
-        int Amount {get;}
-        IResource Resource {get;}
+    public interface IProduces : IComponent
+    {
+        int Amount { get; }
+        IResource Resource { get; }
     }
     public class Produces<TResource> : ComponentWithResourceAndAmount<TResource>, IProduces where TResource : IResource, new()
     {
@@ -13,7 +14,8 @@ namespace asshcii.game.components
         {
         }
 
-        public override string ToString() {
+        public override string ToString()
+        {
             return $"produces {Amount} {Resource.Name}";
         }
     }

@@ -1,5 +1,7 @@
-namespace asshcii.game {
-    public class GameState {
-        
+namespace asshcii.game
+{
+    public class GameState
+    {
+
     }
 }
