@@ -6,21 +6,26 @@ using System.Text;
 using asshcii.ecs;
 using asshcii.game.components;
 
-namespace asshcii.game {
-    public class Building : Entity {
+namespace asshcii.game.buildings
+{
+    public class Building : Entity
+    {
         [Obsolete]
         public byte UpgradeLevel { get; private set; } = 0;
 
-        public Building(string name, Ascii ascii) : base(name) {
+        public Building(string name, Ascii ascii) : base(name)
+        {
             this.AddComponent(ascii);
             this.AddComponent(new UpgradeLevel(0));
         }
 
-        public void Upgrade() {
+        public void Upgrade()
+        {
             var costs = this.GetComponents<IUpgradeCost>();
             var level = this.GetComponent<UpgradeLevel>();
 
-            foreach (var resource in costs.ToList()) {
+            foreach (var resource in costs.ToList())
+            {
                 // Write some exponential increase logic instead
                 resource.Increase();
             }
@@ -28,7 +33,8 @@ namespace asshcii.game {
             level.Upgrade();
         }
 
-        public override string ToString() {
+        public override string ToString()
+        {
             var level = this.GetComponent<UpgradeLevel>();
             var stringBuilder = new StringBuilder();
 

@@ -1,29 +1,36 @@
 using System;
 
-namespace asshcii.game.resources {
-    public interface IResource : IEquatable<IResource> {
-        string Name {get;}
+namespace asshcii.game.resources
+{
+    public interface IResource : IEquatable<IResource>
+    {
+        string Name { get; }
     }
 
-    public abstract class BaseResource : IResource {
+    public abstract class BaseResource : IResource
+    {
         public abstract string Name { get; }
 
         public abstract bool Equals(IResource other);
-        public override bool Equals(object o){
+        public override bool Equals(object o)
+        {
             return Equals(o as IResource);
         }
         public abstract override int GetHashCode();
 
-        public static bool operator==(BaseResource self, IResource other) {
+        public static bool operator ==(BaseResource self, IResource other)
+        {
             throw new Exception("Use .Equals instead");
         }
-        public static bool operator!=(BaseResource self, IResource other) {
+        public static bool operator !=(BaseResource self, IResource other)
+        {
             throw new Exception("Use !.Equals instead");
         }
 
     }
 
-    public class PowerResource : BaseResource {
+    public class PowerResource : BaseResource
+    {
         public override string Name => "Power";
 
         public override bool Equals(IResource other)
@@ -33,7 +40,8 @@ namespace asshcii.game.resources {
         public override int GetHashCode() { return 1; }
     }
 
-    public class IronResource : BaseResource {
+    public class IronResource : BaseResource
+    {
         public override string Name => "Iron";
 
         public override bool Equals(IResource other)

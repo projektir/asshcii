@@ -1,3 +1,4 @@
-namespace asshcii.ecs {
+namespace asshcii.ecs
+{
     public interface IComponent { }
 }
