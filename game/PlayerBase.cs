@@ -4,26 +4,33 @@ using System.Linq;
 
 using asshcii.ecs;
 using asshcii.game.components;
+using asshcii.game.buildings;
 
-namespace asshcii.game {
-    public class PlayerBase : Entity {
+namespace asshcii.game
+{
+    public class PlayerBase : Entity
+    {
         public Planet Planet { get; private set; }
 
         public List<Building> Buildings = new List<Building>();
 
-        public PlayerBase(string name, Planet planet) : base(name) {
+        public PlayerBase(string name, Planet planet) : base(name)
+        {
             Planet = planet;
         }
 
-        public bool TryBuild(Building building) {
+        public bool TryBuild(Building building)
+        {
             var costs = building.GetComponents<IUpgradeCost>();
             var resources = GetComponents<IStorage>();
 
-            foreach(var cost in costs){
+            foreach (var cost in costs)
+            {
                 var matchingResource = resources.FirstOrDefault(r => r.Resource.Equals(cost.Resource));
-                if(matchingResource == null || matchingResource.Amount < cost.Amount) return false;
+                if (matchingResource == null || matchingResource.Amount < cost.Amount) return false;
             }
-            foreach(var cost in costs){
+            foreach (var cost in costs)
+            {
                 var matchingResource = resources.First(r => r.Resource.Equals(cost.Resource));
                 matchingResource.Subtract(cost.Amount);
             }
@@ -32,24 +39,30 @@ namespace asshcii.game {
             return true;
         }
 
-        public override string ToString() {
+        public override string ToString()
+        {
             var stringBuilder = new StringBuilder();
 
             stringBuilder.Append(base.ToString());
             stringBuilder.Append(", Resources: ");
-            foreach(var resource in GetComponents<IStorage>()){
+            foreach (var resource in GetComponents<IStorage>())
+            {
                 stringBuilder.Append($"{resource.Resource.Name}: {resource.Amount}, ");
             }
             stringBuilder.Append($"{nameof(Planet)}: {Planet}, ");
 
             stringBuilder.AppendLine("Buildings: [");
 
-            foreach (Building building in Buildings) {
+            foreach (Building building in Buildings)
+            {
                 stringBuilder.Append("    ").Append(building);
 
-                if (building != Buildings.Last()) {
+                if (building != Buildings.Last())
+                {
                     stringBuilder.AppendLine(", ");
-                } else {
+                }
+                else
+                {
                     stringBuilder.AppendLine();
                 }
             }
