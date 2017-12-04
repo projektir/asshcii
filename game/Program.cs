@@ -1,4 +1,5 @@
 ﻿using System;
+using asshcii.game.actions;
 using asshcii.game.components;
 
 namespace asshcii.game {
@@ -19,17 +20,17 @@ namespace asshcii.game {
             Console.WriteLine(playerBase);
             Console.WriteLine();
 
-            playerBase.TryBuild(refinery);
+            new UpgradeBuildingAction(refinery).Execute(playerBase);
 
             Console.WriteLine(playerBase);
             Console.WriteLine();
 
-            playerBase.TryBuild(refinery);
+            new UpgradeBuildingAction(refinery).Execute(playerBase);
 
             Console.WriteLine(playerBase);
             Console.WriteLine();
 
-            playerBase.TryBuild(refinery);
+            new UpgradeBuildingAction(refinery).Execute(playerBase);
 
             Console.WriteLine(playerBase);
             Console.WriteLine();
