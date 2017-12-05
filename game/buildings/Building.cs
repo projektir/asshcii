@@ -10,9 +10,6 @@ namespace asshcii.game.buildings
 {
     public class Building : Entity
     {
-        [Obsolete]
-        public byte UpgradeLevel { get; private set; } = 0;
-
         public Building(string name, Ascii ascii) : base(name)
         {
             this.AddComponent(ascii);
