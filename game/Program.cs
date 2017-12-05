@@ -14,7 +14,6 @@ namespace asshcii.game
             var refineryAscii = new Ascii(new char[,] { { 'X', ' ', '=' },
                                                         { 'X', ' ', 'X' }});
 
-            // TODO: Make pre-defined buildings that automatically add all the components when they're constructed
             var ironMine = new IronMine();
 
             var playerBase = new PlayerBase("TestBase", neptune);
