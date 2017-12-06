@@ -21,8 +21,8 @@ namespace asshcii.game
 
         public bool TryBuild(Building building)
         {
-            var costs = building.GetComponents<IUpgradeCost>();
-            var resources = GetComponents<IStorage>();
+            var costs = building.GetComponents<IUpgradeCost>().ToList();
+            var resources = GetComponents<IStorage>().ToList();
 
             foreach (var cost in costs)
             {
@@ -53,7 +53,7 @@ namespace asshcii.game
 
             stringBuilder.AppendLine("Buildings: [");
 
-            foreach (Building building in Buildings)
+            foreach (var building in Buildings)
             {
                 stringBuilder.Append("    ").Append(building);
 

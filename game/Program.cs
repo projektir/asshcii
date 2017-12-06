@@ -5,14 +5,11 @@ using asshcii.game.resources;
 
 namespace asshcii.game
 {
-    class Program
+    public static class Program
     {
-        static void Main(string[] args)
+        public static void Main()
         {
             var neptune = new Planet("Neptune");
-
-            var refineryAscii = new Ascii(new char[,] { { 'X', ' ', '=' },
-                                                        { 'X', ' ', 'X' }});
 
             var ironMine = new IronMine();
 

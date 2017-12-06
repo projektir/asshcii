@@ -8,17 +8,11 @@ namespace asshcii.ecs
     public abstract class Entity
     {
         public string Name { get; }
-        private List<IComponent> components;
+        private readonly List<IComponent> components = new List<IComponent>();
 
         protected Entity(string name)
         {
             Name = name;
-            components = new List<IComponent>();
-        }
-
-        public IComponent GetComponent(Type type)
-        {
-            return components.Single(cmpt => cmpt.GetType().Equals(type));
         }
 
         public T GetComponent<T>() where T : IComponent
@@ -34,7 +28,7 @@ namespace asshcii.ecs
         public void AddComponent(IComponent component)
         {
             var type = component.GetType();
-            if (components.Exists(cmpt => cmpt.GetType().Equals(type)))
+            if (components.Exists(cmpt => cmpt.GetType() == type))
             {
                 throw new ArgumentException($"The component {nameof(type)} is already present.");
             }
@@ -52,9 +46,9 @@ namespace asshcii.ecs
                 stringBuilder.Append(", ");
             }
 
-            foreach (IComponent component in components)
+            foreach (var component in components)
             {
-                stringBuilder.Append($"{{ {component.ToString()} }}");
+                stringBuilder.Append($"{{ {component} }}");
 
                 if (component != components.Last())
                 {

@@ -5,8 +5,11 @@ namespace asshcii.game.buildings
 {
     public class IronMine : Building
     {
-        static Ascii ascii = new Ascii(new char[,] { { 'M', 'M' },
-                                                     { 'M', 'M' }});
+        private static readonly Ascii ascii = new Ascii(new[,] {
+            { 'M', 'M' },
+            { 'M', 'M' }
+        });
+
         public IronMine() : base("Iron mine", ascii)
         {
             AddComponent(new Produces<IronResource>(100));
