@@ -4,12 +4,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace asshcii.ecs.test
 {
 
-    class EntityImpl : asshcii.ecs.Entity
+    class EntityImpl : ecs.Entity
     {
         public EntityImpl(string name) : base(name) { }
     }
 
-    class TestComponent : asshcii.ecs.IComponent { }
+    class TestComponent : IComponent { }
 
     [TestClass]
     public class Entity
@@ -35,7 +35,7 @@ namespace asshcii.ecs.test
                 entity.GetComponent<TestComponent>();
                 Assert.Fail("Entity should throw if the component doesn't exist");
             }
-            catch (System.InvalidOperationException)
+            catch (InvalidOperationException)
             {
                 // Succeeds
             }

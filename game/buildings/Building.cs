@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using asshcii.ecs;
 using asshcii.game.components;
 
@@ -12,14 +9,14 @@ namespace asshcii.game.buildings
     {
         public Building(string name, Ascii ascii) : base(name)
         {
-            this.AddComponent(ascii);
-            this.AddComponent(new UpgradeLevel(0));
+            AddComponent(ascii);
+            AddComponent(new UpgradeLevel(0));
         }
 
         public void Upgrade()
         {
-            var costs = this.GetComponents<IUpgradeCost>();
-            var level = this.GetComponent<UpgradeLevel>();
+            var costs = GetComponents<IUpgradeCost>();
+            var level = GetComponent<UpgradeLevel>();
 
             foreach (var resource in costs.ToList())
             {
@@ -32,7 +29,7 @@ namespace asshcii.game.buildings
 
         public override string ToString()
         {
-            var level = this.GetComponent<UpgradeLevel>();
+            var level = GetComponent<UpgradeLevel>();
             var stringBuilder = new StringBuilder();
 
             stringBuilder.Append(base.ToString());

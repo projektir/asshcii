@@ -1,6 +1,7 @@
 using asshcii.ecs;
 
-namespace asshcii {
+namespace asshcii.game.components
+{
 
     public class Attack : IComponent
     {
