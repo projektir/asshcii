@@ -3,7 +3,8 @@ using asshcii.game.resources;
 
 namespace asshcii.game.components
 {
-    public interface IComponentWithResourceAndAmount : IComponent {
+    public interface IComponentWithResourceAndAmount : IComponent
+    {
         int Amount { get; }
         IResource Resource { get; }
     }
