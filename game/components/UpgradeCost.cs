@@ -1,13 +1,9 @@
-using asshcii.ecs;
 using asshcii.game.resources;
 
 namespace asshcii.game.components
 {
-    public interface IUpgradeCost : IComponent
+    public interface IUpgradeCost : IComponentWithResourceAndAmount
     {
-        int Amount { get; }
-        IResource Resource { get; }
-
         void Increase();
     }
     public class UpgradeCost<TResource> : ComponentWithResourceAndAmount<TResource>, IUpgradeCost where TResource : IResource, new()

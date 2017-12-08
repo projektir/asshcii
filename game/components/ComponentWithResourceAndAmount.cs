@@ -3,6 +3,10 @@ using asshcii.game.resources;
 
 namespace asshcii.game.components
 {
+    public interface IComponentWithResourceAndAmount : IComponent {
+        int Amount { get; }
+        IResource Resource { get; }
+    }
     public abstract class ComponentWithResourceAndAmount<TResource> : IComponent where TResource : IResource, new()
     {
         protected ComponentWithResourceAndAmount(int amount)

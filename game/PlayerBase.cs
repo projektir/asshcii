@@ -12,31 +12,14 @@ namespace asshcii.game
     {
         public Planet Planet { get; private set; }
 
+        // TODO: Assuming buildings are unique, we could make a build building also a component
+        // E.g. `AddComponent(new Build<IronMine>());`
+        // To get all buildings, we simply do `.GetComponents<Building>();`
         public List<Building> Buildings = new List<Building>();
 
         public PlayerBase(string name, Planet planet) : base(name)
         {
             Planet = planet;
-        }
-
-        public bool TryBuild(Building building)
-        {
-            var costs = building.GetComponents<IUpgradeCost>().ToList();
-            var resources = GetComponents<IStorage>().ToList();
-
-            foreach (var cost in costs)
-            {
-                var matchingResource = resources.FirstOrDefault(r => r.Resource.Equals(cost.Resource));
-                if (matchingResource == null || matchingResource.Amount < cost.Amount) return false;
-            }
-            foreach (var cost in costs)
-            {
-                var matchingResource = resources.First(r => r.Resource.Equals(cost.Resource));
-                matchingResource.Subtract(cost.Amount);
-            }
-
-            building.Upgrade();
-            return true;
         }
 
         public override string ToString()

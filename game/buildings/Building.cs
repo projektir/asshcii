@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Text;
 using asshcii.ecs;
 using asshcii.game.components;
@@ -18,7 +17,7 @@ namespace asshcii.game.buildings
             var costs = GetComponents<IUpgradeCost>();
             var level = GetComponent<UpgradeLevel>();
 
-            foreach (var resource in costs.ToList())
+            foreach (var resource in costs)
             {
                 // Write some exponential increase logic instead
                 resource.Increase();

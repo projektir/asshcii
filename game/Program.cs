@@ -1,4 +1,5 @@
 ﻿using System;
+using asshcii.game.actions;
 using asshcii.game.buildings;
 using asshcii.game.components;
 using asshcii.game.resources;
@@ -18,12 +19,15 @@ namespace asshcii.game
             playerBase.AddComponent(new Storage<PowerResource>(1000));
             playerBase.Buildings.Add(ironMine);
 
-            while (true)
+            for(int i = 0; i < 10; i++)
             {
                 Console.WriteLine(playerBase);
                 Console.WriteLine();
-                if (!playerBase.TryBuild(ironMine))
+                var result = new UpgradeBuildingAction(ironMine).Execute(playerBase);
+                if (!result.Success)
                 {
+                    Console.WriteLine("Could not upgrade");
+                    Console.WriteLine(result.Message);
                     break;
                 }
             }

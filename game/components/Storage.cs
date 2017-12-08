@@ -1,12 +1,9 @@
-using asshcii.ecs;
 using asshcii.game.resources;
 
 namespace asshcii.game.components
 {
-    public interface IStorage : IComponent
+    public interface IStorage : IComponentWithResourceAndAmount
     {
-        int Amount { get; }
-        IResource Resource { get; }
         void Subtract(int amount);
     }
 
