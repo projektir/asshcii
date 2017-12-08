@@ -1,12 +1,9 @@
-using asshcii.ecs;
 using asshcii.game.resources;
 
 namespace asshcii.game.components
 {
-    public interface IProduces : IComponent
+    public interface IProduces : IComponentWithResourceAndAmount
     {
-        int Amount { get; }
-        IResource Resource { get; }
     }
     public class Produces<TResource> : ComponentWithResourceAndAmount<TResource>, IProduces where TResource : IResource, new()
     {
