@@ -1,34 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Sockets;
 
 namespace ssh
 {
     class Program
     {
-        static void Main(string[] args)
+        private static bool running = true;
+        public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.CancelKeyPress += Console_CancelKeyPress;
+
+            var server = new SshServer<TestState>("Test server");
+            server.Start();
+
+            while (running)
+            {
+                server.Poll();
+                System.Threading.Thread.Sleep(25);
+            }
+
+            server.Stop();
+        }
+
+        private static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)
+        {
+            e.Cancel = true;
+            running = false;
         }
     }
 
-    public abstract class ClientState
-    {
-        public IPAddress IpAddress { get; set; }
-    }
+    public class TestState : ClientState {
 
-    public class SshServer<TClientState> where TClientState : ClientState, new()
-    {
-        public List<Client<TClientState>> Clients { get; set; }
-        public delegate void ClientConnected(SshServer<TClientState> sender, TClientState state);
-        public delegate void ClientDisconnected(SshServer<TClientState> sender, TClientState state);
-        public delegate void ClientMessage(SshServer<TClientState> sender, TClientState state);
-    }
-
-    public class Client<TClientState> where TClientState : ClientState
-    {
-        public TClientState State { get; set; }
-        public TcpClient Socket { get; set; }
     }
 }
