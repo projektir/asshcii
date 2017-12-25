@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace ssh
+namespace SSH
 {
     public abstract class ClientState
     {
